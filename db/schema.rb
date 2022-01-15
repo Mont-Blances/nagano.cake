@@ -10,6 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2022_01_15_045224) do
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_active", default: true, null: false
+    t.text "item_introduction"
+    t.integer "price"
+    t.integer "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 ActiveRecord::Schema.define(version: 2022_01_15_043226) do
 
   create_table "admins", force: :cascade do |t|
