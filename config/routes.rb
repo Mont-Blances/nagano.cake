@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
  # 顧客用ルート
 
    #homesコントローラ
@@ -49,4 +50,5 @@ Rails.application.routes.draw do
    resources :orders, only: [:index, :show, :update]
    resources :order_items, only: [:update]
   end
+
 end
