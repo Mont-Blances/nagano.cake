@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get 'about' => 'public/homes#abuot'
 
   devise_for :customers,skip: [:passwords,], controllers: {
-  　registrations: "public/registrations",
-  　sessions: 'public/sessions'
+  registrations: "public/registrations",
+  sessions: 'public/sessions'
   }
 
   scope module: :public do
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customers_unsubscribe'
    patch 'customers/withdraw' => 'customers#withdraw', as: 'customers_withdraw'
    get 'customers/my_page' => 'customers#show'
-   get 'customers/edit' => 'customers#edit'
+   get 'customers/my_page/edit' => 'customers#edit'
    patch 'customers/update' => 'customers#update'
 
     #ordersコントローラ
