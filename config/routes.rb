@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     #ordersコントローラ
    post 'orders/confirm' => 'orders#confirm', as: 'orders_confirm'
    get 'orders/thank' => 'orders#thank'
-   resources :orders, only: [:create, :new, :index, :show]
+   resources :orders, only: [:create, :new, :index, :show ,:confirm]
 
     #itemsコントローラ
    resources :items, only: [:index, :show]

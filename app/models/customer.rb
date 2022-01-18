@@ -15,6 +15,10 @@ class Customer < ApplicationRecord
   
   has_many :delivery, dependent: :destroy 
   has_many :order, dependent: :destroy
+  
+  def full_name
+    self.family_name + " " + self.first_name
+  end
  
 
 end

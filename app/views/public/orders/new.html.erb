@@ -20,7 +20,7 @@
              <%= f.radio_button :adress, "1", checked: true %>
              <%= f.label :"ご自身の住所"%><br>
              <%= "〒#{@customer.postcode} #{@customer.adress}" %><br>
-             <%= "#{ @customer.family_name }" %>
+             <%= "#{ @customer.full_name }" %>
            </div>
            <div>
             <%= f.radio_button :adress, "2"%>
