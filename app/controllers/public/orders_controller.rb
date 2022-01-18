@@ -4,7 +4,6 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
   end
   
-  
   def confirm
   end
   
@@ -16,8 +15,12 @@ class Public::OrdersController < ApplicationController
     else
       flash[:alart] = "入力内容をご確認ください"
       render :new
+  end 
+
+  def thank
   end
-    
+
+
   def index
   end
 

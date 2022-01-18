@@ -28,8 +28,10 @@ Rails.application.routes.draw do
    resources :items, only: [:index, :show]
 
     #cart_itemsコントローラ
-   resources :cart_items, only: [:index, :create, :update, :destroy]
    delete 'cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all'
+   resources :cart_items, only: [:index, :create, :update, :destroy]
+   
+
 
     #deriveriesコントローラ
    resources :deriveries, only: [:index, :create, :destroy, :edit, :update]
@@ -47,7 +49,7 @@ Rails.application.routes.draw do
    resources :customers, only: [:index, :edit, :update, :show]
    resources :genres, only: [:index, :create, :edit, :update]
    resources :items, only: [:show, :index, :new, :create, :edit, :update]
-   resources :orders, only: [:index, :show, :update]
+   resources :orders, only: [:index, :show, :update, :thank]
    resources :order_items, only: [:update]
   end
 
