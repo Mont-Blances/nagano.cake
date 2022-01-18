@@ -12,6 +12,9 @@ class Customer < ApplicationRecord
   validates :adress, presence: true
   validates :tel, numericality: {only_integer: true} #数値のみ
   validates :email, presence: true, uniqueness: true
- has_many :delivery, dependent: :destroy 
+  
+  has_many :delivery, dependent: :destroy 
+  has_many :order, dependent: :destroy
+ 
 
 end
