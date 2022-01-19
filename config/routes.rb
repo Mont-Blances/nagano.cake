@@ -2,16 +2,16 @@ Rails.application.routes.draw do
 
  # 顧客用ルート
 
-   #homesコントローラ
-  root to: "public/homes#top"
-  get 'about' => 'public/homes#abuot'
-
   devise_for :customers,skip: [:passwords,], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
   }
 
   scope module: :public do
+   #homesコントローラ
+  root to: "homes#top"
+  get 'homes/about' => 'homes#about'
+
     #cutomersコントローラ
    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customers_unsubscribe'
    patch 'customers/withdraw' => 'customers#withdraw', as: 'customers_withdraw'
