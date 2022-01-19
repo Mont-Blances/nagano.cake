@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get 'about' => 'public/homes#abuot'
 
   devise_for :customers,skip: [:passwords,], controllers: {
-  　registrations: "public/registrations",
-  　sessions: 'public/sessions'
+  registrations: "public/registrations",
+  sessions: 'public/sessions'
   }
 
   scope module: :public do
@@ -16,20 +16,20 @@ Rails.application.routes.draw do
    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customers_unsubscribe'
    patch 'customers/withdraw' => 'customers#withdraw', as: 'customers_withdraw'
    get 'customers/my_page' => 'customers#show'
-   get 'customers/edit' => 'customers#edit'
+   get 'customers/my_page/edit' => 'customers#edit'
    patch 'customers/update' => 'customers#update'
 
     #ordersコントローラ
    post 'orders/confirm' => 'orders#confirm', as: 'orders_confirm'
    get 'orders/thank' => 'orders#thank'
-   resources :orders, only: [:create, :new, :index, :show]
+   resources :orders, only: [:create, :new, :index, :show ,:confirm]
 
     #itemsコントローラ
    resources :items, only: [:index, :show]
 
     #cart_itemsコントローラ
-   resources :cart_items, only: [:index, :create, :update, :destroy]
    delete 'cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all'
+   resources :cart_items, only: [:index, :create, :update, :destroy]
 
     #deriveriesコントローラ
    resources :deriveries, only: [:index, :create, :destroy, :edit, :update]
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
    resources :customers, only: [:index, :edit, :update, :show]
    resources :genres, only: [:index, :create, :edit, :update]
    resources :items, only: [:show, :index, :new, :create, :edit, :update]
-   resources :orders, only: [:index, :show, :update]
+   resources :orders, only: [:index, :show, :update, :thank]
    resources :order_items, only: [:update]
   end
 

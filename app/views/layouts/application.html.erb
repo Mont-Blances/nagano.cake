@@ -9,6 +9,7 @@
   </head>
 
   <body>
+
      <div id="wrapper">
     <%= render "layouts/header"%>
     <main>
@@ -22,5 +23,22 @@
     <%= render "layouts/footer"%>
     
     </div>
+
+    <% if customer_signed_in? %>
+      <li>
+        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "新規登録", new_customer_registration_path %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_customer_session_path %>
+      </li>
+    <% end %>
+    <main>
+    <%= yield %>
+    </main>
+
   </body>
 </html>
