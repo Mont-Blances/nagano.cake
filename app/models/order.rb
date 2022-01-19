@@ -6,8 +6,9 @@ class Order < ApplicationRecord
    has_many :order_detail, dependent: :destroy
    
   validates :customer_id, presence: true
-  validates :postcord, presence: true
+  # validates :postcord
   validates :address, presence: true
-  validates :destination, presence: true
-  validates :billing_amount, presence: true
+  # validates :destination
+  validates :payment_method, presence: true
+#   validates :billing_amount, presence: true
 end

@@ -37,7 +37,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       t.string :family_name_kana
       t.string :first_name_kana
       t.string :postcode
-      t.string :adress
+      t.string :address
       t.string :tel
 
 
