@@ -22,10 +22,9 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = current_customer
-    if @customer.update(is_deleted: false) #trueからfalseにupdate
-      reset_session #ページ遷移しても以前入力した情報を保持することができる機能のことをsessionという
-      redirect_to root_path
-    end
+    @customer.update(is_registered: false) #trueからfalseにupdate
+    reset_session #ページ遷移しても以前入力した情報を保持することができる機能のことをsessionという
+    redirect_to root_path
   end
 
   private

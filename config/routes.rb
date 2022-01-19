@@ -30,8 +30,6 @@ Rails.application.routes.draw do
     #cart_itemsコントローラ
    delete 'cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all'
    resources :cart_items, only: [:index, :create, :update, :destroy]
-   
-
 
     #deriveriesコントローラ
    resources :deriveries, only: [:index, :create, :destroy, :edit, :update]
