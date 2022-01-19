@@ -36,5 +36,4 @@ class Public::SessionsController < Devise::SessionsController
       redirect_to new_customer_registration_path
     end
   end
-
 end
