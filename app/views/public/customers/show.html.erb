@@ -20,7 +20,7 @@
 　</tr>
 　<tr>
 　　<th>住所</th>
-    <td><%= @customer.adress %></td>
+    <td><%= @customer.address %></td>
 　</tr>
 　<tr>
     <th>電話番号</th>
@@ -30,4 +30,12 @@
     <th>メールアドレス</th>
     <td><%= @customer.email %></td>
 　</tr>
-</table>
+  <tr>
+    <th><h5><strong>配送先</strong></h5></th>
+    <td><%= link_to "一覧を見る", deriveries_path %></td>
+  </tr>
+  <tr>
+    <th><h5><strong>注文履歴</strong></h5></th>
+    <td><%= link_to "一覧を見る", orders_path %></td>
+  </tr>
+  </table>
