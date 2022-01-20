@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     create_table :orders do |t|
 
       t.integer :customer_id
-      t.string :postcord
+      t.string :postcode
       t.string :address
       t.string :destination
       t.integer :postage, default: 800

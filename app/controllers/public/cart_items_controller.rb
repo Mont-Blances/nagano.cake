@@ -17,8 +17,14 @@ class Public::CartItemsController < ApplicationController
       @cart_item.delete
       end
     end
-    @cart_item.save
-    redirect_back(fallback_location: root_path)
+    if @cart_item.save
+      flash[:notice] = "カートに商品を追加しました"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:alart] = "個数を選択してからカートに追加してください"
+      render :new
+      
+    end
   end
 
   def update
@@ -30,6 +36,7 @@ class Public::CartItemsController < ApplicationController
   def destroy
     @cart_item = current_customer.cart_items.find(params[:id])
     @cart_item.destroy
+    flash[:notice] = "カートの商品を削除しました"
     redirect_back(fallback_location: root_path)
   end
 
@@ -37,6 +44,7 @@ class Public::CartItemsController < ApplicationController
     # cart_items.where(customer_id: current_customer.id).destroy_all
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all
+    flash[:notice] = "カートの商品を全て削除しました"
     redirect_back(fallback_location: root_path)
   end
 
