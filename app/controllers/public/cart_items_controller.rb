@@ -23,8 +23,8 @@ class Public::CartItemsController < ApplicationController
 
   def update
     @cart_item = current_customer.cart_items.find(params[:id])
-    @cart_item.update(cart_item_update_params)
-    redirect_back(fallback_location: root_path)
+    @cart_item.update(cart_item_params)
+    redirect_to cart_items_path, notice: '数量を変更しました'
   end
 
   def destroy
@@ -46,8 +46,5 @@ class Public::CartItemsController < ApplicationController
     params.require(:cart_item).permit(:quantity, :item_id, :customer_id)
   end
 
-  def cart_item_update_params
-    params.require(:cart_item).permit(:item_id,:quantity)
-  end
 
 end
