@@ -12,9 +12,7 @@
           <%= f.radio_button :payment_method, :credit ,checked: true %>
         　<%= f.label :payment_method, '銀行口座' %>
         　<%= f.radio_button :payment_method, :bank %>
-    </div>
 
-    <div>
        <h5>お届け先</h5>
            <div>
              <%= f.radio_button :address_option, 1, checked: true %>
@@ -31,8 +29,8 @@
              <%= f.radio_button :address_option, 3 %>
              <%= f.label :address_3, "新しいお届け先 "%>
              <div class="form_group">
-               <%= f.label :postcord, "郵便番号（ハイフンなし）" %>
-               <%= f.text_field :postcord,placeholder:"0000000" %>
+               <%= f.label :postcode, "郵便番号（ハイフンなし）" %>
+               <%= f.text_field :postcode,placeholder:"0000000" %>
              </div>
              <div class="col-xs-12 form_group my-3">
                <%= f.label :address, "住所"%>

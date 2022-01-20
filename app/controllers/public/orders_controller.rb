@@ -16,9 +16,9 @@ class Public::OrdersController < ApplicationController
       @order.address = current_customer.address
     elsif params[:order][:address_option] == "2"
   # view で定義している adress が"2"だったときにこの処理を実行します
-      if Delivery.exists?(name: params[:order][:delivery_id])
+      if Delivery.exists?(id: params[:order][:delivery_id])
   # registered は viwe で定義しています
-        @order.name = Delivery.find(params[:order][:delivery_id]).name
+        @order.destination= Delivery.find(params[:order][:delivery_id]).destination
         @order.address = Delivery.find(params[:order][:delivery_id]).address
       else
         redirect_to action: 'new'
@@ -26,9 +26,11 @@ class Public::OrdersController < ApplicationController
       end
     elsif params[:order][:address_option] == "3"
   # view で定義している adress が"3"だったときにこの処理を実行します
-      delivery_new = current_customer.Delivery.new(address_params)
+      delivery_new = current_customer.delivery.new(delivery_params)
       if delivery_new.save # 確定前(確認画面)で save してしまうことになりますが、私の知識の限界でした
+       flash[:notice] = "注文内容をご確認ください"
       else
+         flash[:alart] = "入力内容をご確認ください"
         redirect_to action: 'new'
   # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻します
       end
@@ -42,14 +44,31 @@ class Public::OrdersController < ApplicationController
 
 
   def create
-   @order = Order.new(order_params)
-    if @order.save
-      flash[:notice] = "注文情報を確定しました"
-     redirect_to orders_path
-    else
-      flash[:alart] = "入力内容をご確認ください"
-      render :new
+  cart_items = current_customer.cart_items.all
+# ログインユーザーのカートアイテムをすべて取り出して cart_items に入れます
+  @order = current_customer.order.new(order_params)
+# 渡ってきた値を @order に入れます
+  if @order.save
+# ここに至るまでの間にチェックは済ませていますが、念の為IF文で分岐させています
+    cart_items.each do |cart|
+# 取り出したカートアイテムの数繰り返します
+# order_item にも一緒にデータを保存する必要があるのでここで保存します
+      order_details = OrderDetail.new
+      order_details.item_id = cart.item_id
+      order_details.order_id = @order.id
+      order_details.order_quantity = cart.quantity
+# 購入が完了したらカート情報は削除するのでこちらに保存します
+      order_details.price = cart.item.price
+# カート情報を削除するので item との紐付けが切れる前に保存します
+      order_details.save
     end
+    redirect_to orders_thank_path
+    cart_items.destroy_all
+# ユーザーに関連するカートのデータ(購入したデータ)をすべて削除します(カートを空にする)
+  else
+    @order = Order.new(order_params)
+    render :new
+  end
   end
 
   def thank
@@ -62,12 +81,15 @@ class Public::OrdersController < ApplicationController
   def show
   end
 
+
+private
+
   def order_params
       params.require(:order).permit(:customer_id, :postcode, :address, :destination, :billing_amount, :payment_method, :order_status, :postage)
   end
 
-  def address_params
-    params.require(:order).permit(:name, :address)
+  def delivery_params
+    params.require(:order).permit(:customer_id, :destination, :address , :postcode)
   end
 
 end
