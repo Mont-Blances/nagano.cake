@@ -23,7 +23,7 @@ class Public::CartItemsController < ApplicationController
     else
       flash[:alart] = "個数を選択してからカートに追加してください"
       render :new
-      
+
     end
   end
 
