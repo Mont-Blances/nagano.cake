@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   enum order_status:{wait: 0, confirmation: 1, making: 2, preparation: 3, finish: 4}
 
    belongs_to :customer
-   has_many :order_detail, dependent: :destroy
+   has_many :order_details, dependent: :destroy
 
   validates :customer_id, presence: true
   # validates :postcord

@@ -1,5 +1,5 @@
 <h1>注文履歴一覧</h1>
-<table>
+<table border="1" style="border-collapse: collapse">
 
   <thead>
      <tr>
@@ -10,20 +10,25 @@
        <th>ステータス</th>
        <th>注文詳細</th></tr>
   </thead>
-  <% @orders.each do |order| %>
+  
   <tbody>
+    <% @orders.each do |order| %>
     <tr>
       <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-      <td><%= order.address %></td>
+      <td><%= order.postcode %>
+        </br><%= order.address %>
+        </br><%= order.destination %>
+      </td>
       <td>
         <% @order_details.each do |order_detail| %>
         <%= order_detail.item.name %>
+        </br>
         <% end %>
       </td>
-      <td><%= order.billing_amount %></td>
+      <td><%= (order.billing_amount).to_s(:delimited)%>円</td>
       <td><%= order.order_status_i18n %></td>
       <td><%= link_to "表示する", order_path(order) %></td>
      </tr>
+     <% end %>
   </tbody>
 </table>
-<% end %>

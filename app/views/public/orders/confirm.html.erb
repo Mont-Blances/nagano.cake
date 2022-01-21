@@ -1,18 +1,37 @@
-<% @cart_items.each do |cart| %>
-  <%= cart.item.name %> <!-- 商品名 -->
-  <%= (cart.item.price).to_s(:delimited) %>　<!-- 金額 -->
-  <%= cart.quantity %> <!-- 個数 -->
-  <%= (cart.item.price*cart.quantity).to_s(:delimited) %> <!-- 小計 -->
-<% end %>
-<p>ご請求金額</p>
-<%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 -->
+<h4>注文情報確認画面</h4>
+<table border="1" style="border-collapse: collapse">
+  <thead>
+    <tr>
+      <th>商品名</th><th>単価（税込）</th><th>数量</th><th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |cart| %>
+    <tr>
+      <td><%= cart.item.name %> <!-- 商品名 --></td>
+      <td><%= (cart.item.price).to_s(:delimited) %>　<!-- 金額 --></td>
+      <td><%= cart.quantity %> <!-- 個数 --></td>
+      <td><%= (cart.item.price*cart.quantity).to_s(:delimited) %> <!-- 小計 --></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+<table border="1" style="border-collapse: collapse">
+  <tr><th>送料</th><td><%= @order.postage %></td></tr>
+  <tr><th>商品合計</th><td><%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 --></td></tr>
+  <tr><th>請求金額</th><td><%= (@total.to_s(:delimited).to_i + @order.postage) %> <!-- お買い物の合計金額 --></td></tr>
+</table>
+
+<p>支払方法</p>
+<%= @order.payment_method_i18n %>
 <p>お届け先</p>
-<%= @order.address %>
+〒<%= @order.postcode %></br><%= @order.address %></br><%= @order.destination %>
 
 <!-- ユーザーには注文確定ボタンだけ表示します -->
 <%= form_with model: @order, url: orders_path, local: true do |f| %>
   <%= f.hidden_field :destination %>
   <%= f.hidden_field :address %>
   <%= f.hidden_field :billing_amount, value: @total %>
+  <%= f.hidden_field :postcode %>
   <%= f.submit "注文を確定する" %>
 <% end %>
