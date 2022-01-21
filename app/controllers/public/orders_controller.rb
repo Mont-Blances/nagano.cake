@@ -79,11 +79,11 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.order.all
-    @order_details = OrderDetail.select(:item_id).distinct
+
   end
 
   def show
-    @order_detail = OrderDetail.select(:item_id).distinct
+
     @order = Order.find(params[:id])
   end
 
