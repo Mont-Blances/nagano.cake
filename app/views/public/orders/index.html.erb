@@ -10,17 +10,17 @@
        <th>ステータス</th>
        <th>注文詳細</th></tr>
   </thead>
-  
+
   <tbody>
     <% @orders.each do |order| %>
     <tr>
       <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-      <td><%= order.postcode %>
+      <td>〒<%= order.postcode %>
         </br><%= order.address %>
         </br><%= order.destination %>
       </td>
       <td>
-        <% @order_details.each do |order_detail| %>
+        <% order.order_details.each do |order_detail| %>
         <%= order_detail.item.name %>
         </br>
         <% end %>
