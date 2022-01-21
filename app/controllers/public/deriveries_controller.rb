@@ -1,11 +1,11 @@
 class Public::DeriveriesController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def index
      @delivery = Delivery.new
-     @deliverys =Delivery.where(customer_id: current_customer.id)
+     @deliveries =Delivery.where(customer_id: current_customer.id)
   end
-  
+
    def create
    @delivery = Delivery.new(delivery_params)
    @delivery.customer_id = current_customer.id
@@ -14,11 +14,11 @@ class Public::DeriveriesController < ApplicationController
       redirect_to deriveries_path
     end
    end
-  
+
   def edit
     @delivery = Delivery.find(params[:id])
   end
-  
+
   def update
     @delivery = Delivery.find(params[:id])
     if @delivery.update(delivery_params)
@@ -33,11 +33,11 @@ class Public::DeriveriesController < ApplicationController
     flash[:notice] = "配送先を１件削除しました"
     redirect_to deriveries_path
   end
-  
+
 private
 
   def delivery_params
     params.require(:delivery).permit(:postcode,:address, :destination)
   end
-  
+
 end
