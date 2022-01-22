@@ -1,7 +1,6 @@
 class Public::ItemsController < ApplicationController
   def index
-    @items = Item.all.order(created_at: :desc)
-    @item = Item.find(params[:id])
+    @items = Item.all
   end
   
 
@@ -9,5 +8,6 @@ class Public::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
   end
+  
 
 end
