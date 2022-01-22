@@ -1,66 +1,71 @@
 
-<h2>Sign up</h2>
-<%= notice %>
 
-<%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :性 %><br />
-    <%= f.text_field :family_name %>
+<div class="container col-xs-6 col-xs-offset-2 sign-up-message">
+  <br>
+  <h4><i class="fas fa-plus-circle"></i> 新規会員登録</h4>
+  <br>
+  <div class="row">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "layouts/error_message", resource: resource %>
+    <table>
+      <tbody>
+        <tr>
+          <th>名前</th>
+          <td class="sign-up-small-cell">(姓)</td>
+          <td><%= f.text_field :family_name, autfocus: true %></td>
+          <td class="sign-up-small-cell">(名)</td>
+          <td><%= f.text_field :first_name, autfocus: true %></td>
+        </tr>
+        <tr>
+          <th>フリガナ</th>
+          <td class="sign-up-small-cell">(セイ)</td>
+          <td><%= f.text_field :family_name_kana, autfocus: true %></td>
+          <td class="sign-up-small-cell">(メイ)</td>
+          <td><%= f.text_field :first_name_kana, autfocus: true %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td class="sign-up-small-cell"></td>
+          <td><%= f.email_field :email, autfocus: true, autocomplete: "email" %></td>
+        </tr>
+        <tr>
+          <th>郵便番号(ハイフンなし)</th>
+          <td class="sign-up-small-cell"></td>
+          <td><%= f.text_field :postcode, autfocus: true %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td class="sign-up-small-sell"></td>
+          <td colspan="3"><%= f.text_field :address, autfocus: true, class: "sign-up-address" %></td>
+        </tr>
+        <tr>
+          <th>電話番号(ハイフンなし)</th>
+          <td class="sign-up-small-sell"></td>
+          <td><%= f.text_field :tel, autfocus: true %></td>
+        </tr>
+        <tr>
+          <th>パスワード(6文字以上)</th>
+          <td class="sign-up-small-cell"></td>
+          <td><%= f.password_field :password %></td>
+        </tr>
+        <tr>
+          <th>パスワード(確認用)</th>
+          <td class="sign-up-small-sell"></td>
+          <td><%= f.password_field :password_confirmation, autocomplete: "current-password" %></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="customer-sign-up-actions">
+      <%= f.submit "新規登録", class:"btn btn-success col-xs-3 col-xs-offset-5" %>
+    </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :名 %><br />
-    <%= f.text_field :first_name %>
+</div>
+<br>
+<div class="container col-xs-6 col-xs-offset-2 sign-up-message">
+  <p class="font-weight-bold">既に登録済みの方</p>
+  <div class="row">
+    <p class="col-xs-offset"><%= link_to 'こちら', new_customer_session_path %>からログインしてください。</p>
   </div>
-
-  <div class="field">
-    <%= f.label :セイ %><br />
-    <%= f.text_field :family_name_kana %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メイ %><br />
-    <%= f.text_field :first_name_kana %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :郵便番号ハイフンなし %><br />
-    <%= f.text_field :postcode %>
-  </div>
-
-  <div class="field">
-    <%= f.label :住所 %><br />
-    <%= f.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :電話番号ハイフンなし %><br />
-    <%= f.text_field :tel %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード6文字以上 %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード確認用 %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>
