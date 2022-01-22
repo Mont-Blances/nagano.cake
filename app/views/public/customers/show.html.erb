@@ -30,5 +30,12 @@
     <th>メールアドレス</th>
     <td><%= @customer.email %></td>
 　</tr>
+  <tr>
+    <th><h5><strong>配送先</strong></h5></th>
+    <td><%= link_to "一覧を見る", deriveries_path %></td>
+  </tr>
+  <tr>
+    <th><h5><strong>注文履歴</strong></h5></th>
+    <td><%= link_to "一覧を見る", orders_path %></td>
+  </tr>
 </table>
-<div><%= link_to "配送先一覧", deriveries_path %></div>
