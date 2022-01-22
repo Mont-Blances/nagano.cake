@@ -2,30 +2,30 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_customer.cart_items.all
-
   end
 
   def create
-    # binding.pry
-    @cart_item = current_customer.cart_items.new(cart_item_params)
+    @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
 
-    @cart_items = current_customer.cart_items.all
-    @cart_items.each do |cart_item|
-      if cart_item.item_id == @cart_item.item_id
-      new_quantity = cart_item.quantity + @cart_item.quantity
-      cart_item.update_attribute(:quantity, new_quantity)
-      @cart_item.delete
-      end
-    end
-    if @cart_item.save
-      flash[:notice] = "カートに商品を追加しました"
-      redirect_back(fallback_location: root_path)
+    if @cart_item.present?
+      @cart_item.quantity += params[:cart_item][:quantity].to_i
     else
-      flash[:alart] = "個数を選択してからカートに追加してください"
-      render :new
+      @cart_item = current_customer.cart_items.new(cart_item_params)
+    end
 
+    if @cart_item.quantity.nil?
+      flash[:alert] = '数量を選択して下さい'
+      redirect_to request.referer
+    end
+
+    if @cart_item.save
+      redirect_to cart_items_path, notice: '商品を追加しました'
+    else
+      flash[:alert] = '商品を追加できませんでした'
+      redirect_to request.referer
     end
   end
+
 
   def update
     @cart_item = current_customer.cart_items.find(params[:id])
