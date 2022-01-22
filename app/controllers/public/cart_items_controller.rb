@@ -5,17 +5,18 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
+    @cart_item = current_customer.cart_items.new(cart_item_params)
+    if @cart_item.quantity.nil?
+      flash[:alert] = '数量を選択して下さい'
+      redirect_to request.referer and return
+    end
+
     @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
 
     if @cart_item.present?
       @cart_item.quantity += params[:cart_item][:quantity].to_i
     else
       @cart_item = current_customer.cart_items.new(cart_item_params)
-    end
-
-    if @cart_item.quantity.nil?
-      flash[:alert] = '数量を選択して下さい'
-      redirect_to request.referer
     end
 
     if @cart_item.save
