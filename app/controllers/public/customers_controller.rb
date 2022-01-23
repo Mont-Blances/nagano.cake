@@ -12,6 +12,7 @@ class Public::CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to customers_my_page_path, notice: "登録情報を更新しました"
     else
+      flash.now[:alert] = "空欄があります。入力内容をご確認ください"
       render "edit"
     end
   end
@@ -30,7 +31,7 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:family_name, :first_name, :family_name_kana, :first_name_kana, :postcode, :adress, :tel, :is_registered)
+    params.require(:customer).permit(:family_name, :first_name, :family_name_kana, :first_name_kana, :postcode, :address, :tel, :is_registered)
   end
 
 end
