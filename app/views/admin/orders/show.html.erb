@@ -51,12 +51,12 @@
           </tr>
         </thead>
         <tbody>
-          <% @order.order_detail.each do |order_detail| %>
+          <% @order.order_details.each do |order_detail| %>
             <tr>
               <td><%= order_detail.item.name %></td>
-              <td><%= order_detail.item.price %></td>
+              <td><%= order_detail.item.taxin_price%></td>
               <td><%= order_detail.order_quantity %></td>
-              <td><%= (order_detail.item.price * order_detail.order_quantity) %></td>
+              <td><%= (order_detail.item.taxin_price * order_detail.order_quantity) %></td>
               <%= form_with model:[:admin, order_detail], local: true do |f| %>
               <!-- モデルをもとにセレクトボックスを生成-->
                 <td><%= f.collection_select(:production_status, OrderDetail.production_statuses_i18n, :first, :last,  { selected: order_detail.production_status }, {class: "form-control"})%></td>
@@ -71,7 +71,7 @@
       <table class="table table-borderless">
         <tr>
           <td class="font-weight-bold">商品合計</td>
-          <td><%#= @order.billing_amount - @order.postage %>円</td>
+          <td><%= @order.billing_amount %>円</td>
         </tr>
         <tr>
           <td class="font-weight-bold">送料</td>
@@ -79,7 +79,7 @@
         </tr>
         <tr>
           <td class="font-weight-bold">請求金額合計</td>
-          <td><%= @order.billing_amount %>円</td>
+          <td><%= @order.billing_amount + @order.postage %>円</td>
         </tr>
       </table>
     </div>
