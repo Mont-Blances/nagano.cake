@@ -5,6 +5,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
+
     @cart_item = current_customer.cart_items.new(cart_item_params)
     if @cart_item.quantity.nil?
       flash[:alert] = '数量を選択して下さい'
@@ -22,7 +23,7 @@ class Public::CartItemsController < ApplicationController
     if @cart_item.save
       redirect_to cart_items_path, notice: '商品を追加しました'
     else
-      flash[:alert] = '商品を追加できませんでした'
+      flash[:alert] = '商品を追加できませんでした。1回の注文は10個までです。'
       redirect_to request.referer
     end
   end

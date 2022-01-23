@@ -12,7 +12,7 @@ class Public::OrdersController < ApplicationController
   # view で定義している adress が"1"だったときにこの処理を実行します
   # form_with で @order で送っているので、order に紐付いた adress となります。以下同様です
   # この辺の紐付けは勉強不足なので gem の pry-byebug を使って確認しながら行いました
-      @order.destination = current_customer.family_name # @order の各カラムに必要なものを入れます
+      @order.destination = current_customer.family_name + current_customer.first_name# @order の各カラムに必要なものを入れます
       @order.address = current_customer.address
       @order.postcode = current_customer.postcode
     elsif params[:order][:address_option] == "2"
@@ -23,7 +23,7 @@ class Public::OrdersController < ApplicationController
         @order.address = Delivery.find(params[:order][:delivery_id]).address
         @order.postcode = Delivery.find(params[:order][:delivery_id]).postcode
       else
-        redirect_to action: 'new'
+        redirect_to action: 'new', notice: "入力内容をご確認ください"
   # 既存のデータを使っていますのでありえないですが、万が一データが足りない場合は new を render します
       end
     elsif params[:order][:address_option] == "3"
@@ -32,8 +32,8 @@ class Public::OrdersController < ApplicationController
       if delivery_new.save # 確定前(確認画面)で save してしまうことになりますが、私の知識の限界でした
        flash[:notice] = "注文内容をご確認ください"
       else
-         flash[:alart] = "入力内容をご確認ください"
-        redirect_to action: 'new'
+       flash[:alart] = "入力内容をご確認ください"
+       redirect_to action: 'new'
   # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻します
       end
     else
@@ -83,7 +83,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-
     @order = Order.find(params[:id])
   end
 
