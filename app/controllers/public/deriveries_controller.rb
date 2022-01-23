@@ -12,6 +12,10 @@ class Public::DeriveriesController < ApplicationController
     if @delivery.save
       flash[:notice] = "新規配送先を登録しました"
       redirect_to deriveries_path
+    else
+      flash.now[:alert] = "入力内容をご確認ください"
+      @deliveries =Delivery.where(customer_id: current_customer.id)
+      render :index
     end
    end
 

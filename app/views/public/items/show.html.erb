@@ -8,10 +8,13 @@
   <tr><th>ジャンル</th><td><%= @item.genre.name %></td></tr>
   <tr><th>￥</th><td><%= @item.taxin_price.to_s(:delimited) %>円</td></tr>
 </table>
-<%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
-<%= f.hidden_field :item_id, :value => @item.id %>
-<%= f.hidden_field :customer_id, :value => current_customer.id %>
-<%= f.select :quantity,[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10]], {include_blank: '個数選択'} %>
-<%= f.submit 'カートに入れる',class: "btn btn-success" %>
+<% if customer_signed_in? %>
+  <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.hidden_field :customer_id, :value => current_customer.id %>
+  <%= f.select :quantity,[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10]], {include_blank: '個数選択'} %>
+  <%= f.submit 'カートに入れる',class: "btn btn-success" %>
+  <% end %>
+<% else %>
+  <%= link_to "商品を購入したい場合はこちらから会員登録をお願いします",new_customer_registration_path %>
 <% end %>
-<%= link_to "カートを見る", cart_items_path %>

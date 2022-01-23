@@ -30,9 +30,9 @@ class Public::OrdersController < ApplicationController
   # view で定義している adress が"3"だったときにこの処理を実行します
       delivery_new = current_customer.delivery.new(delivery_params)
       if delivery_new.save # 確定前(確認画面)で save してしまうことになりますが、私の知識の限界でした
-       flash[:notice] = "注文内容をご確認ください"
+       flash[:notice] = "注文承りました。"
       else
-       flash[:alart] = "入力内容をご確認ください"
+       flash.now[:alert] = "入力内容をご確認ください"
        redirect_to action: 'new'
   # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻します
       end
