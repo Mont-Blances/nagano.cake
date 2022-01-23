@@ -13,8 +13,13 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.save
-    redirect_to action: 'index'
+    if @item.save
+      flash.now[:notice] = "商品を追加しました。"
+      redirect_to action: 'index'
+    else
+      flash.now[:alert] = "商品を追加できませんでした。"
+      render :new
+    end
   end
 
   def edit
@@ -24,8 +29,13 @@ class Admin::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
-    redirect_to action: 'index'
+    if @item.update(item_params)
+      flash.now[:notice] = "編集内容を更新しました。"
+      redirect_to action: 'index'
+    else
+      flash.now[:alert] = "入力内容を確認してください。"
+      render :edit
+    end
   end
 
   private
