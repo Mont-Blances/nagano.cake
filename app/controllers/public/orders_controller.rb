@@ -40,8 +40,10 @@ class Public::OrdersController < ApplicationController
       redirect_to action: 'new' # ありえないですが、万が一当てはまらないデータが渡ってきた場合の処理です
     end
     @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用します
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_taxin_price }
+    @postage = @order.postage#送料
+    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_taxin_price }#前注文商品（税込）合計金額
   # 合計金額を出す処理です sum_price はモデルで定義したメソッドです
+    @sum_total = @postage + @total
   end
 
 
