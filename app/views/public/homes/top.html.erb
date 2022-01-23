@@ -41,15 +41,10 @@
      </div>
      
     <div class="row">
-     <div class="col-xs-2">
-　　　　<div class="box17">
-            <p class="font-weight-bold">商品ジャンル</p>
-                <br>
-                 <% @genres.each do |genre| %>
-                  <p><%= genre.name %></p>
-             　<% end %>
-        </div>
+     <div class="col-xs-2  px-sm-0 my-5">
+       <%= render "layouts/genre"%>
      </div>
+     
         <div class="col-xs-8 offset-md-1">
           <div class="box26">
             <span class="box-title">新着商品</span>
