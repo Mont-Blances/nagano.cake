@@ -2,11 +2,14 @@
 <% @items.each do |item| %>
 <table>
   <tr>
+
+   
     <td><%= link_to attachment_image_tag(item, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg",size:'40x40'),item_path(item.id) %>
     <br>
-<%= link_to item.name, item_path(item.id) %>
-<br>
-<%= (item.price * 1.1).floor %>円</td>
+    <%= link_to item.name, item_path(item.id) %>
+    <br>
+    <%= (item.price * 1.1).floor %>円</td>
+
   </tr>
 
 </table>

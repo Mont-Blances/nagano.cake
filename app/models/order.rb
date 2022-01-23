@@ -7,11 +7,11 @@ class Order < ApplicationRecord
    has_many :order_details, dependent: :destroy
 
   validates :customer_id, presence: true
-  # validates :postcord
+  validates :postcode,  presence: true
   validates :address, presence: true
-  # validates :destination
+  validates :destination, presence: true
   validates :payment_method, presence: true
-#   validates :billing_amount, presence: true
+  validates :billing_amount, presence: true
 
   def order_items_billing_amount
     (billing_amount - 800).round
