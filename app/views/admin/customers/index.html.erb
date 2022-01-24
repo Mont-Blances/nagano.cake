@@ -19,9 +19,9 @@
         <td><%= customer.email %></td>
         <td>
           <% if customer.is_registered? %>
-            <span class="text-secondary"><strong>有効</strong></span>
+            <span class="text-success"><strong>有効</strong></span>
           <% else %>
-            <span class="text-success"><strong>退会</strong></span>
+            <span class="text-secondary"><strong>退会</strong></span>
           <% end %>
         </td>
       </tr>
