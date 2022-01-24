@@ -7,11 +7,12 @@ class Item < ApplicationRecord
     validates :name
     validates :item_introduction
     validates :price
-    
-    
+
+
   end
 
   def taxin_price
     (self.price * 1.10).round
   end
+
 end
