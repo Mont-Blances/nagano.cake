@@ -35,7 +35,7 @@
             <tbody>
               <tr>
                 <th class="table-danger" >送料</th>
-                <td><%="#{ @postage }円" %></td>
+                <td><%="#{ @order.postage }円" %></td>
               </tr>
               <tr>
                 <th class="table-danger">商品合計</th>
@@ -43,7 +43,7 @@
               </tr>
               <tr>
                 <th class="table-danger">ご請求金額</th>
-                <td><%= "#{@sum_total}円"%></td>
+                <td><%= "#{(@total + @order.postage).to_s(:delimited)}円"%></td>
               </tr>
             </tbody>
           </table>
