@@ -1,4 +1,3 @@
-
 <div class="container">
   　<div class="row">
       <div class="col-xs-3">
@@ -20,11 +19,11 @@
               <tbody>
                 <tr>
                 <% @cart_items.each do |cart| %>
-                　<td></td>
+                　<td><%= link_to attachment_image_tag(item, :image, :fill, 500, 350, format: 'jpeg', fallback: "no_image.jpg",size:'50x50'),item_path(item.id) %></td>
                   <td><%= cart.item.name %></td>　<!-- 商品名 -->
-                  <td><%= cart.item.taxin_price.to_s(:delimited) %>円</td>　<!-- 金額 -->
+                  <td><%="#{  (cart.item.price).to_s(:delimited) }円（税抜）"%></td>　<!-- 金額 -->
                   <td><%= cart.quantity %> </td>　<!-- 個数 -->
-                  <td><%= cart.sum_taxin_price.to_s(:delimited) %></td> <!-- 小計 -->
+                  <td><%="#{  (cart.item.price*cart.quantity).to_s(:delimited) }円（税抜）"%></td> <!-- 小計 -->
                 </tr>
                 <% end %>
               </tbody>
@@ -39,7 +38,7 @@
               </tr>
               <tr>
                 <th class="table-danger">商品合計</th>
-                <td><%="#{ @total.to_s(:delimited)}円"%> </td>
+                <td><%="#{ @total.to_s(:delimited)}円（税込）"%> </td>
               </tr>
               <tr>
                 <th class="table-danger">ご請求金額</th>
@@ -78,5 +77,3 @@
         <%= f.hidden_field :billing_amount, value: @total %>
         <%= f.submit "注文を確定する" , class: "btn btn-success" %>
       <% end %>
-
-
