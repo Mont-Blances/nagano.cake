@@ -3,13 +3,12 @@ class Item < ApplicationRecord
   belongs_to :genre
   has_many :cart_items
   has_many :order_details
-    with_options presence: true do
-    validates :name
-    validates :item_introduction
-    validates :price
 
 
-  end
+  validates :name, presence: true
+  validates :item_introduction, presence: true
+  validates :price, presence: true
+  validates :is_active, inclusion: [true, false]
 
   def taxin_price
     (self.price * 1.10).round

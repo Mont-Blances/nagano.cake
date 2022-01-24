@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
   def new
     @order = Order.new
     @customer = current_customer
@@ -30,9 +31,9 @@ class Public::OrdersController < ApplicationController
   # view で定義している adress が"3"だったときにこの処理を実行します
       delivery_new = current_customer.delivery.new(delivery_params)
       if delivery_new.save # 確定前(確認画面)で save してしまうことになりますが、私の知識の限界でした
-       flash[:notice] = "注文承りました。"
+       flash[:notice] = "注文内容をご確認ください"
       else
-       flash.now[:alert] = "入力内容をご確認ください"
+       flash[:alart] = "入力内容をご確認ください"
        redirect_to action: 'new'
   # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻します
       end
@@ -40,10 +41,8 @@ class Public::OrdersController < ApplicationController
       redirect_to action: 'new' # ありえないですが、万が一当てはまらないデータが渡ってきた場合の処理です
     end
     @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用します
-    @postage = @order.postage#送料
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_taxin_price }#前注文商品（税込）合計金額
+    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_taxin_price }
   # 合計金額を出す処理です sum_price はモデルで定義したメソッドです
-    @sum_total = @postage + @total
   end
 
 

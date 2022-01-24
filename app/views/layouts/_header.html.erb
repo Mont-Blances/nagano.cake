@@ -1,7 +1,7 @@
 <header class="shadow-sm">
   <nav class="navbar navbar-expand-lg navbar-light">
       <% if admin_signed_in? %>
-          <%= link_to admin_path do %>
+          <%= link_to admin_root_path do %>
             <%= image_tag 'logo1.png', :size =>'120x120'%>
             <% end %>
       <% else %>
@@ -28,7 +28,7 @@
           </li>
          <% elsif admin_signed_in? %>
            <li class="nav-item">
-             <%= link_to icon('fas','file-alt',"注文履歴一覧"), admin_orders_path, class:'btn btn-outline-light mx-3 my-1'%>
+             <%= link_to icon('fas','file-alt',"注文履歴一覧"), admin_root_path, class:'btn btn-outline-light mx-3 my-1'%>
            </li>
            <li class="nav-item">
              <%= link_to icon('fas','cookie-bite',"商品一覧"), admin_items_path,class: 'btn btn-outline-light mx-3 my-1' %>
