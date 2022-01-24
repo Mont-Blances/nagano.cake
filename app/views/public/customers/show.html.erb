@@ -1,5 +1,9 @@
 <div class="container">
-  <h2 class="my-5"><i class="fas fa-user-circle"></i>マイページ</h2>
+  <div class="row">
+　　<div class="col-xs-12 mt-3">
+ 　　　<h4><i class="fas fa-user-circle"></i>マイページ</h4>
+ 　　</div>
+ 　</div>
   <div class="row">
     <p>登録者情報</p>
     <p><%= link_to "編集する",  customers_my_page_edit_path, class: "btn btn-success ml-5" %></p>
@@ -28,7 +32,7 @@
         <tr>
           <td>メールアドレス</td>
           <td><%= @customer.email %></td>
-
+        </tr>
       </tbody>
     </table>
     <div class="mr-5">
@@ -40,4 +44,5 @@
       <p><%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %></p>
     </div>
   </div>
+</div>
 
