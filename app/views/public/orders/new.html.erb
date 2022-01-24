@@ -12,7 +12,7 @@
                   <%= f.radio_button :payment_method, :credit ,checked: true %>
                 　<%= f.label :payment_method, '銀行口座' %>
                 　<%= f.radio_button :payment_method, :bank %>
-    
+
            <p class="font-weight-bold">お届け先<p>
                    <div>
                      <%= f.radio_button :address_option, 1, checked: true %>
@@ -23,7 +23,7 @@
                    <div>
                     <%= f.radio_button :address_option, 2 %>
                      <%= f.label :address_2, "登録住所からの選択" %><br>
-                    <%= f.collection_select :delivery_id, Delivery.all , :id, :address%>
+                    <%= f.collection_select :delivery_id, current_customer.deliveries.all , :id, :address%>
                    </div>
                     <div>
                      <%= f.radio_button :address_option, 3 %>
