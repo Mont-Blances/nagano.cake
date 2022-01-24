@@ -9,8 +9,9 @@
             <table class="table table-bordered">
               <thead class="thead-light">
                 <tr>
+                  <th></th>
                   <th scope="col">商品名</th>
-                  <th scope="col">単価</th>
+                  <th scope="col">単価(税込)</th>
                   <th scope="col">数量</th>
                   <th scope="col">小計</th>
                 </tr>
@@ -18,12 +19,13 @@
               <tbody>
                 <tr>
                 <% @cart_items.each do |cart| %>
-                　<td><%= link_to attachment_image_tag(item, :image, :fill, 500, 350, format: 'jpeg', fallback: "no_image.jpg",size:'50x50'),item_path(item.id) %></td>
+                　<td><%= attachment_image_tag cart.item, :image, :fill, 500, 350, class:"icon border", fallback: "no_image.jpg" ,size:'80x80'%></td>
+
 
                   <td><%= cart.item.name %></td>　<!-- 商品名 -->
-                  <td><%="#{  (cart.item.price).to_s(:delimited) }円（税抜）"%></td>　<!-- 金額 -->
+                  <td><%= cart.item.taxin_price.to_s(:delimited) %></td>　<!-- 金額 -->
                   <td><%= cart.quantity %> </td>　<!-- 個数 -->
-                  <td><%="#{  (cart.item.price*cart.quantity).to_s(:delimited) }円（税抜）"%></td> <!-- 小計 -->
+                  <td><%= cart.sum_taxin_price.to_s(:delimited) %></td> <!-- 小計 -->
                 </tr>
                 <% end %>
               </tbody>
@@ -38,7 +40,7 @@
               </tr>
               <tr>
                 <th class="table-danger">商品合計</th>
-                <td><%="#{ @total.to_s(:delimited)}円（税込）"%> </td>
+                <td><%="#{ @total.to_s(:delimited)}円"%> </td>
               </tr>
               <tr>
                 <th class="table-danger">ご請求金額</th>
