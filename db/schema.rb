@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 2022_01_17_054916) do
     t.string "postcode"
     t.string "address"
     t.string "tel"
-    t.boolean "is_registered", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_registered", default: true
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -72,10 +72,10 @@ ActiveRecord::Schema.define(version: 2022_01_17_054916) do
     t.boolean "is_active", default: true, null: false
     t.text "item_introduction"
     t.integer "price"
-    t.integer "image_id"
+    t.string "image_id"
+    t.integer "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "genre_id"
   end
 
   create_table "order_details", force: :cascade do |t|
