@@ -15,7 +15,6 @@
                   <th scope="col">単価(税込)</th>
                   <th scope="col">数量</th>
                   <th scope="col">小計</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -24,9 +23,9 @@
                 　<td><%= attachment_image_tag cart.item, :image, :fill, 500, 350, class:"icon border", fallback: "no_image.jpg" ,size:'80x80'%></td>
 
                   <td><%= cart.item.name %></td>　<!-- 商品名 -->
-                  <td><%= cart.item.taxin_price.to_s(:delimited) %></td>　<!-- 金額 -->
+                  <td><%= cart.item.taxin_price.to_s(:delimited) %>円</td>　<!-- 金額 -->
                   <td><%= cart.quantity %> </td>　<!-- 個数 -->
-                  <td><%= cart.sum_taxin_price.to_s(:delimited) %></td> <!-- 小計 -->
+                  <td><%= cart.sum_taxin_price.to_s(:delimited) %>円</td> <!-- 小計 -->
 
                 </tr>
                 <% end %>
@@ -42,11 +41,11 @@
               </tr>
               <tr>
                 <th class="table-danger">商品合計（税込）</th>
-                <td><%="#{ @total.to_s(:delimited)}円"%> </td>
+                <td><%="#{ @total.to_s(:delimited, delimiter: ",")}円"%> </td>
               </tr>
               <tr>
                 <th class="table-danger">ご請求金額（税込）</th>
-                <td><%= "#{(@total + @order.postage).to_s(:delimited)}円"%></td>
+                <td><%= "#{(@total + @order.postage).to_s(:delimited, delimiter: ",")}円"%></td>
               </tr>
             </tbody>
           </table>
