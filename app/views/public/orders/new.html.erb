@@ -23,6 +23,7 @@
     
            <p class="col-xs-3 font-weight-bold my-3 border-bottom">お届け先<p>
                     <div class="col-xs-10">
+
                      <%= f.radio_button :address_option, 1, checked: true %>
                      <%= f.label :address_1, "ご自身の住所"%><br>
                      <%= "〒#{@customer.postcode} #{@customer.address}" %><br>
@@ -31,7 +32,9 @@
                     <div class="col-xs-10">
                     <%= f.radio_button :address_option, 2 %>
                      <%= f.label :address_2, "登録住所からの選択" %><br>
-                    <%= f.collection_select :delivery_id, Delivery.all , :id, :address %>
+
+                    <%= f.collection_select :delivery_id, current_customer.deliveries.all , :id, :address%>
+
                    </div>
                      <div class="col-xs-10">
                      <%= f.radio_button :address_option, 3 %>
