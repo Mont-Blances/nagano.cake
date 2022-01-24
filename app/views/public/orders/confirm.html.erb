@@ -10,9 +10,9 @@
             <table class="table table-bordered">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col"></th>
+                  <th></th>
                   <th scope="col">商品名</th>
-                  <th scope="col">単価</th>
+                  <th scope="col">単価(税込)</th>
                   <th scope="col">数量</th>
                   <th scope="col">小計</th>
                 </tr>
@@ -21,10 +21,12 @@
                 <tr>
                 <% @cart_items.each do |cart| %>
                 　<td><%= attachment_image_tag cart.item, :image, :fill, 500, 350, class:"icon border", fallback: "no_image.jpg" ,size:'80x80'%></td>
+
                   <td><%= cart.item.name %></td>　<!-- 商品名 -->
-                  <td><%="#{  (cart.item.price*1.1).round.to_s(:delimited, delimiter: ",") }円"%></td>　<!-- 金額 -->
+                  <td><%= cart.item.taxin_price.to_s(:delimited) %>円</td>　<!-- 金額 -->
                   <td><%= cart.quantity %> </td>　<!-- 個数 -->
-                  <td><%="#{  (cart.item.price*cart.quantity*1.1).round.to_s(:delimited, delimiter: ",") }円"%>(税込）</td> <!-- 小計 -->
+                  <td><%= cart.sum_taxin_price.to_s(:delimited) %>円</td> <!-- 小計 -->
+
                 </tr>
                 <% end %>
               </tbody>

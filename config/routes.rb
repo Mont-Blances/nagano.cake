@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
     #deriveriesコントローラ
    resources :deriveries, only: [:index, :create, :destroy, :edit, :update]
+
+   get 'item_search', to: 'searches#item_search'
   end
 
 
