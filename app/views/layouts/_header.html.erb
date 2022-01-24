@@ -15,7 +15,7 @@
           <li class="nav-item active">
            <span class="nav-link text-dark">ようこそ、<%= current_customer.family_name%>さん</span>
           </li>
-            <%= link_to icon('fas','fas fa-user',"マイページ"), customers_my_page_path(current_customer), class: "btn btn-outline-light mx-3 my-1"%>
+            <%= link_to icon('fas','fas fa-user',"マイページ"), customers_my_page_path, class: "btn btn-outline-light mx-3 my-1"%>
           </li>
           <li class="nav-item ">
             <%= link_to icon('fas','cookie-bite',"商品一覧"), items_path,class: 'btn btn-outline-light mx-3 my-1'%>

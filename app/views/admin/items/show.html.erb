@@ -1,6 +1,7 @@
 <h1>商品詳細</h1>
 
-<%= attachment_image_tag(@item, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg",size:'40x40') %>
+ <%= attachment_image_tag @item, :image, :fill, 500, 350, class:"icon border", fallback: "no_image.jpg" ,size:'350x300'%>
+
 <table>
   <thead>
   <tr><th>商品名</th><td><%= @item.name %></td></tr>
