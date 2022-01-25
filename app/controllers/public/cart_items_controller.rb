@@ -6,8 +6,8 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-
     @cart_item = current_customer.cart_items.new(cart_item_params)
+    #個数を選択せずに商品を追加した場合、元のページにリダイレクト
     if @cart_item.quantity.nil?
       flash[:alert] = '数量を選択して下さい'
       redirect_to request.referer and return
@@ -29,7 +29,6 @@ class Public::CartItemsController < ApplicationController
     end
   end
 
-
   def update
     @cart_item = current_customer.cart_items.find(params[:id])
     @cart_item.update(cart_item_params)
@@ -44,7 +43,6 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy_all
-    # cart_items.where(customer_id: current_customer.id).destroy_all
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all
     flash[:notice] = "カートの商品を全て削除しました"
