@@ -1,11 +1,11 @@
 # Nagano Cake
- 
-![](https://github.com/Mont-Blances/nagano.cake/blob/develop/app/assets/images/logo1.png)
+
+![](https://github.com/Mont-Blances/nagano.cake/blob/develop/app/assets/images/logo1.png | width=100)
 
 ### [概要]
 長野県にある小さな洋菓子店「ながのCAKE」の商品を通販するためのECサイト開発。
 ___
- 
+
 ### [背景]
 元々近隣住民が顧客だったが、昨年始めたInstagramから人気となり、全国から注文が来るよう になった。
 InstagramのDMやメールで通販の注文を受けていたが、情報管理が煩雑になってきたため、管 理機能を含んだ通販サイトを開設しようと思い至った。
@@ -31,7 +31,7 @@ ___
 - 会員一覧/詳細（会員ステータスを有効/退会に切り替えが可能）
 - 商品一覧/詳細/編集（販売ステータスの変更が可能）
 - 商品のジャンル設定
-- 検索(商品名)  
+- 検索(商品名)
 
 ---
 
