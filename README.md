@@ -1,24 +1,43 @@
-# README
+# NaganoCAKE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img src="https://user-images.githubusercontent.com/94730431/150933017-504539a9-5e12-4799-a4b2-132f40fc68ad.png" width="200">
 
-Things you may want to cover:
+### [概要]
+長野県にある小さな洋菓子店「ながのCAKE」の商品を通販するためのECサイト開発。
+___
 
-* Ruby version
+### [背景]
+元々近隣住民が顧客だったが、昨年始めたInstagramから人気となり、全国から注文が来るよう になった。
+InstagramのDMやメールで通販の注文を受けていたが、情報管理が煩雑になってきたため、管 理機能を含んだ通販サイトを開設しようと思い至った。
+___
 
-* System dependencies
+### [実装機能]
 
-* Configuration
+### 会員側
 
-* Database creation
+- 会員ログイン/ログアウト
+- 会員登録/退会/編集
+- 配送先登録、指定
+- 商品一覧、詳細
+- カート機能
+- 注文機能
+- 注文履歴一覧/詳細
+- 検索(商品名)
 
-* Database initialization
 
-* How to run the test suite
+### 管理者側
 
-* Services (job queues, cache servers, search engines, etc.)
+- 管理者ログイン/ログアウト
+- 注文履歴一覧/詳細（注文ステータス, 製作ステータスの切り替えが可能）
+- 会員一覧、詳細、編集（会員ステータスを有効/退会に切り替えが可能）
+- 商品一覧、詳細,編集（販売ステータスの変更が可能）
+- 商品のジャンル設定
+- 検索(商品名)
 
-* Deployment instructions
+---
 
-* ...
+### [開発メンバー]
+
+- ポコリ
+- おゆちゃん
+- りーくん
