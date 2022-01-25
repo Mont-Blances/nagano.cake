@@ -1,6 +1,6 @@
 # Nagano Cake
 
-![](https://github.com/Mont-Blances/nagano.cake/blob/develop/app/assets/images/logo1.png =250x250)
+![](https://github.com/Mont-Blances/nagano.cake/blob/develop/app/assets/images/logo1.png )
 
 ### [概要]
 長野県にある小さな洋菓子店「ながのCAKE」の商品を通販するためのECサイト開発。
