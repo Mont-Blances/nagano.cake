@@ -43,7 +43,6 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy_all
-
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all
     flash[:notice] = "カートの商品を全て削除しました"
