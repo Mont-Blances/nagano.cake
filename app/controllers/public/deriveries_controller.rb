@@ -2,13 +2,13 @@ class Public::DeriveriesController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-     @delivery = Delivery.new
-     @deliveries =Delivery.where(customer_id: current_customer.id)
+    @delivery = Delivery.new
+    @deliveries =Delivery.where(customer_id: current_customer.id)
   end
 
-   def create
-   @delivery = Delivery.new(delivery_params)
-   @delivery.customer_id = current_customer.id
+  def create
+    @delivery = Delivery.new(delivery_params)
+    @delivery.customer_id = current_customer.id
     if @delivery.save
       flash[:notice] = "新規配送先を登録しました"
       redirect_to deriveries_path
@@ -17,7 +17,7 @@ class Public::DeriveriesController < ApplicationController
       @deliveries =Delivery.where(customer_id: current_customer.id)
       render :index
     end
-   end
+  end
 
   def edit
     @delivery = Delivery.find(params[:id])

@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
+  
   def show
     @customer = current_customer
   end
@@ -17,7 +18,7 @@ class Public::CustomersController < ApplicationController
       render "edit"
     end
   end
-
+    #退会機能
   def unsubscribe
     @customer = current_customer
   end
