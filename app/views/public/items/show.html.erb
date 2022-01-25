@@ -12,7 +12,7 @@
       <h4 class ="font-weight-bold"><%= @item.name %></h4>
       <p><%= @item.item_introduction %></p>
 　　　　　<hr class="borderstyle"><br>
-       <h5>¥ <%= @item.taxin_price.to_i.to_s(:delimited, delimiter: ",") %><small> (税込)</small> </h5><br>
+       <h5>¥ <%= @item.taxin_price.to_i.to_s(:delimited) %><small> (税込)</small> </h5><br>
 
         <% if @item.is_active == true %>
           <% if customer_signed_in? %>
