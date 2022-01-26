@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
-　　<div class="col-xs-12 mt-3">
- 　　　<h4><i class="fas fa-address-book"></i> 注文履歴詳細</h4>
+    <div class="col-xs-12 mt-3">
+      <h4><i class="fas fa-address-book"></i> 注文履歴詳細</h4>
  　　</div>
- 　</div>
+  </div>
 
-   <% if @order.present? %>
- <div class="row">
-   <div class="col-xs-10 mt-2">
-       <strong>注文情報</strong>
+  <% if @order.present? %>
+    <div class="row">
+      <div class="col-xs-10 mt-2">
+        <strong>注文情報</strong>
         <table class="table table-bordered table-condensed">
           <tbody>
             <tr>
@@ -17,11 +17,11 @@
             </tr>
             <tr>
               <th>配送先</th>
-             <td>
+              <td>
                 <%= @order.postcode %><br>
                 <%= @order.address %><br>
                 <%= @order.destination %>
-                </td>
+              </td>
             </tr>
             <tr>
               <th>支払い方法</th>
@@ -33,10 +33,9 @@
             </tr>
           </tbody>
         </table>
-    </div>
-
-  <div class="col-xs-2 mt-2 offset-1">
-      <strong>請求情報</strong>
+      </div>
+      <div class="col-xs-2 mt-2 offset-1">
+        <strong>請求情報</strong>
         <table class="table table-bordered table-condensed">
           <tr>
             <th>商品合計</th>
@@ -51,38 +50,35 @@
             <td><%= (@order.postage + @order.billing_amount).to_s(:delimited) %>円</td>
           </tr>
         </table>
-   </div>
-</div>
-
-   <div class="row">
-       <div class="col-xs-8 mt-3">
-          <strong>注文内容</strong>
-          <table class="table table-bordered table-condensed">
-            <thead>
-              <tr>
-                <th>商品</th>
-                <th>単価(税込)</th>
-                <th>個数</th>
-                <th>合計</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @order.order_details.each do |order_detail| %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-8 mt-3">
+        <strong>注文内容</strong>
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th>商品</th>
+              <th>単価(税込)</th>
+              <th>個数</th>
+              <th>合計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @order.order_details.each do |order_detail| %>
               <tr>
                 <td><%= order_detail.item.name %></td>
                 <td><%= order_detail.item.taxin_price %>円</td>
                 <td><%= order_detail.order_quantity  %></td>
                 <td><%= (order_detail.item.taxin_price * order_detail.order_quantity).to_s(:delimited)  %>円</td>
               </tr>
-              <% end %>
-            </tbody>
-          </table>
-     </div>
-   </div>
-        <%= link_to "注文履歴一覧へ戻る", orders_path, class: "btn btn-info btn-lg" %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= link_to "注文履歴一覧へ戻る", orders_path, class: "btn btn-info btn-lg" %>
   <% else %>
-  <p>注文履歴がありません</p>
+    <p>注文履歴がありません</p>
   <% end %>
- 　　</div>
- 　</div>
 </div>
