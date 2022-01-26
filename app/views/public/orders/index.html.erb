@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 mt-3">
+      <h4><i class="fas fa-address-book"></i> 注文履歴詳細</h4>
+ 　　</div>
+  </div>
+  <% if @orders.present? %>
+    <table class="table table-hover table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th><i class="fas fa-calender-day"></i>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払い金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <td>
+              <%= order.postcode %><br>
+              <%= order.address %><br>
+              <%= order.destination  %>
+            </td>
+            <td>
+              <% order.order_details.each do |order_detail| %>
+                <%= order_detail.item.name %><br>
+              <% end %>
+            </td>
+            <td><%= (order.billing_amount + order.postage).to_s(:delimited) %>円</td>
+            <td><%= order.order_status_i18n %></td>
+            <td>
+              <%= link_to "注文詳細", order_path(order), class: "btn btn-success" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>注文履歴がありません</p>
+  <% end %>
+</div>
+

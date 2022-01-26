@@ -1,0 +1,43 @@
+<div class="container col-xs-6">
+  <div class="row">
+　　<div class="col-xs-12 mt-3">
+ 　　　<h4><i class="fas fa-cookie-bite"></i> 商品詳細</h4>
+ 　　</div>
+ 　</div>
+
+    <div class="row align-items-center m-5">
+    <div class="col-lg text-center mb-5">
+      <%= attachment_image_tag @item, :image, :fill, 500, 350, class:"icon border", fallback: "no_image.jpg" ,size:'350x300'%>
+    </div>
+    <div class="col-lg">
+      <table class="table item-table">
+        <tr>
+          <th nowrap>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th nowrap>商品詳細</th>
+          <td><%= @item.item_introduction %></td>
+        </tr>
+        <tr>
+          <th nowrap>ジャンル</th>
+          <td><%= @item.genre.name %></td>
+        </tr>
+        <tr>
+          <th nowrap>税込価格<br>(税抜価格)</th>
+          <td><%= (@item.price * 1.1).floor %> (<%= @item.price %>)円</td>
+        </tr>
+        <tr>
+          <th nowrap>販売ステータス</th>
+          <td>
+           <%= @item.is_active == true ? "販売中" : "販売停止中" %>
+          </td>
+        </tr>
+      </table>
+      <div class="d-flex justify-content-around">
+        <p><%= link_to "編集する",edit_admin_item_path(@item), class:"btn btn-success" %></p>
+        <p><%= link_to "商品一覧へ戻る", admin_items_path, class:"btn btn-outline-secondary" %></p>
+      </div>
+    </div>
+  </div>
+</div>

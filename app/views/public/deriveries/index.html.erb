@@ -1,0 +1,57 @@
+<div class="container">
+   <div class="row">
+     <div class="col-xs-12 mt-3">
+ 　　   　<h4><i class="fas fa-address-book"></i> 配送先登録/一覧</h4>
+ 　  　</div>
+   </div>
+
+   <div class="row">
+     <%= form_with model: @delivery, url: deriveries_path, local:true do |f| %>
+        <div class="container address col-xs-10 mb-6">
+          <div class="form-group row">
+            <%= f.label :"郵便番号(ハイフンなし)", class: "col-6 control-label" %>
+            <%= f.text_field :postcode, class: "col-6 form-control-static postcode" %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :"住所", class: "col-6 control-static address" %>
+            <%= f.text_field :address, class: "col-6 form-control-static address" %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :"宛名", class: "col-6 control-label" %>
+            <%= f.text_field :destination, class: "col-6 form-control-static destination" %>
+          </div>
+          <div class="text-center">
+            <%= f.submit "登録する", class: "col-6 mb-3 btn btn-success"%>
+          </div>
+        </div>
+      <% end %>
+   </div>
+
+   <div class="row">
+     <% if @deliveries.present? %>
+      <table class="table table-hover table-bordered mb-5">
+        <thead>
+          <tr>
+            <th>郵便番号</th>
+            <th>住所</th>
+            <th>宛名</th>
+             <th colspan="4"></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <% @deliveries.each do |delivery| %>
+              <td><%= delivery.postcode %></td>
+              <td><%= delivery.address %></td>
+              <td><%= delivery.destination %></td>
+              <td>
+                <%= link_to "編集する" , edit_derivery_path(delivery) ,class:"btn btn-dark btn-sm mr-auto mb-1 mr-5" %>
+                <%= link_to "削除する" , derivery_path(delivery) ,method: :delete ,class:"btn btn-outline-danger btn-sm mb-1 ml-5" %>
+              </td>
+            </tr>
+            <% end %>
+        </tbody>
+        <% end %>
+      </table>
+   </div>
+ </div>

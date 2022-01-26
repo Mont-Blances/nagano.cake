@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NaganoCake</title>
+    <title>NaganoCAKE</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+     <script src="https://kit.fontawesome.com/c3fbb4b704.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
-    <%= yield %>
+     <div id="wrapper">
+        <%= render "layouts/header"%>
+    <main>
+     <div id="flash">
+        <%= render "layouts/flash" %>
+     </div>
+      <div class="container">
+      <%= yield %>
+    </main>
+    <%= render "layouts/footer"%>
+    </div>
+  　　<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  　　<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+　　　<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </body>
 </html>

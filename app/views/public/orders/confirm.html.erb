@@ -1,0 +1,86 @@
+<div class="container">
+  
+  <div class="row">
+    <div class="col-xs-12 mt-3">
+ 　  　<h4><i class="fas fa-check-circle"></i>注文情報確認</h4>
+ 　　</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-8">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th></th>
+            <th scope="col">商品名</th>
+            <th scope="col">単価(税込)</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @cart_items.each do |cart| %>
+              <td><%= attachment_image_tag cart.item, :image, :fill, 500, 350, class:"icon border", fallback: "no_image.jpg" ,size:'80x80'%></td>
+              <td><%= cart.item.name %></td>　<!-- 商品名 -->
+              <td><%= cart.item.taxin_price.to_s(:delimited) %>円</td>　<!-- 金額 -->
+              <td><%= cart.quantity %> </td>　<!-- 個数 -->
+              <td><%= cart.sum_taxin_price.to_s(:delimited) %>円</td> <!-- 小計 -->
+          </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-3 offset-md-1 mt-4">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th class="table-danger" >送料</th>
+            <td><%="#{ @order.postage }円" %></td>
+          </tr>
+          <tr>
+            <th class="table-danger">商品合計（税込）</th>
+            <td><%="#{ @total.to_s(:delimited, delimiter: ",")}円"%> </td>
+          </tr>
+          <tr>
+            <th class="table-danger">ご請求金額（税込）</th>
+            <td><%= "#{(@total + @order.postage).to_s(:delimited, delimiter: ",")}円"%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-8">
+      <table class="table">
+        <tr>
+          <th class="info">支払方法</th>
+          <td class="text-left">
+            <%= @order.payment_method_i18n %>
+          </td>
+        </tr>
+        <tr>
+          <th class="info">お届け先</th>
+          <td class="text-left">
+            <%= "〒#{@order.postcode} #{@order.address} #{@order.destination}様" %>
+          </td>
+        </tr>
+      </table>
+    </div>
+　</div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- ユーザーには注文確定ボタンだけ表示します -->
+      <%= form_with model: @order, url: orders_path, local: true do |f| %>
+        <%= f.hidden_field :destination %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :postcode %>
+        <%= f.hidden_field :billing_amount, value: @total %>
+        <%= f.submit "注文を確定する" , class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+  
+</div>
